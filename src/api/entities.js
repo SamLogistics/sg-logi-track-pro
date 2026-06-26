@@ -37,6 +37,19 @@ function stripSystemFields(payload) {
   return rest;
 }
 
+function sanitizePayload(payload) {
+  const cleaned = {};
+  for (const [key, value] of Object.entries(payload)) {
+    if (value === undefined) continue;
+    if (value === '') {
+      cleaned[key] = null;
+      continue;
+    }
+    cleaned[key] = value;
+  }
+  return cleaned;
+}
+
 async function list(table, sort) {
   const { column, ascending } = parseSort(sort);
   const { data, error } = await supabase
@@ -50,10 +63,10 @@ async function list(table, sort) {
 
 async function create(table, payload) {
   const { data: authData } = await supabase.auth.getUser();
-  const insertPayload = {
+  const insertPayload = sanitizePayload({
     ...stripSystemFields(payload),
     ...(authData.user ? { created_by: authData.user.id } : {}),
-  };
+  });
 
   const { data, error } = await supabase
     .from(table)
@@ -68,7 +81,7 @@ async function create(table, payload) {
 async function update(table, id, payload) {
   const { data, error } = await supabase
     .from(table)
-    .update(stripSystemFields(payload))
+    .update(sanitizePayload(stripSystemFields(payload)))
     .eq('id', id)
     .select()
     .single();

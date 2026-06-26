@@ -44,6 +44,12 @@ const IMPORT_ONLY_REMARKS = [
 
 const PRICE_REMARKS = [...COMMON_REMARKS, ...IMPORT_ONLY_REMARKS];
 
+function toDateInput(value) {
+  if (!value) return '';
+  const text = String(value);
+  return text.includes('T') ? text.slice(0, 10) : text;
+}
+
 export default function JobForm({ job, onSubmit, onCancel }) {
   const [form, setForm] = useState({
     is_export: job?.is_export || false,
@@ -51,24 +57,32 @@ export default function JobForm({ job, onSubmit, onCancel }) {
     customer_name: job?.customer_name || "",
     vendor: job?.vendor || "",
     vendor_invoice_number: job?.vendor_invoice_number || "",
-    vendor_invoice_amount: job?.vendor_invoice_amount || "",
+    vendor_invoice_amount: job?.vendor_invoice_amount ?? "",
     carrier: job?.carrier || "",
     vessel: job?.vessel || "",
     voy: job?.voy || "",
     container_number: job?.container_number || "",
     customer_ref: job?.customer_ref || "",
     bl_number: job?.bl_number || "",
-    export_containers: job?.export_containers || [{ container_number: "", vgm: "", truck_out_date: "", port_in_date: "" }],
+    export_containers: (job?.export_containers?.length
+      ? job.export_containers
+      : [{ container_number: "", vgm: "", truck_out_date: "", port_in_date: "" }]
+    ).map((c) => ({
+      container_number: c.container_number || "",
+      vgm: c.vgm ?? "",
+      truck_out_date: toDateInput(c.truck_out_date),
+      port_in_date: toDateInput(c.port_in_date),
+    })),
     ccp: job?.ccp || "",
-    ccp_valid_date: job?.ccp_valid_date || "",
+    ccp_valid_date: toDateInput(job?.ccp_valid_date),
     portnet_released: job?.portnet_released || false,
-    vessel_eta: job?.vessel_eta || "",
-    trucking_date: job?.trucking_date || "",
-    container_vgm: job?.container_vgm || "",
-    delivery_date: job?.delivery_date || "",
-    truck_out_date: job?.truck_out_date || "",
-    return_date: job?.return_date || "",
-    port_in_date: job?.port_in_date || "",
+    vessel_eta: toDateInput(job?.vessel_eta),
+    trucking_date: toDateInput(job?.trucking_date),
+    container_vgm: job?.container_vgm ?? "",
+    delivery_date: toDateInput(job?.delivery_date),
+    truck_out_date: toDateInput(job?.truck_out_date),
+    return_date: toDateInput(job?.return_date),
+    port_in_date: toDateInput(job?.port_in_date),
     return_depot: job?.return_depot || "",
     remarks: job?.remarks || [],
     remark_prices: job?.remark_prices || {},
@@ -83,7 +97,7 @@ export default function JobForm({ job, onSubmit, onCancel }) {
     delivery_unit: job?.delivery_unit || "",
     is_out_of_gauge: job?.is_out_of_gauge || false,
     escort_required: job?.escort_required || false,
-    escort_date: job?.escort_date || "",
+    escort_date: toDateInput(job?.escort_date),
     escort_time: job?.escort_time || "",
     pic_name: job?.pic_name || "",
     pic_contact: job?.pic_contact || "",
@@ -104,7 +118,7 @@ export default function JobForm({ job, onSubmit, onCancel }) {
     lcl_remark_prices: job?.lcl_remark_prices || {},
     lcl_invoice_to: job?.lcl_invoice_to || "",
     lcl_distance_km: job?.lcl_distance_km || "",
-    lld_date: job?.lld_date || "",
+    lld_date: toDateInput(job?.lld_date),
     lld_pickup_point: job?.lld_pickup_point || "",
     lld_pickup_time: job?.lld_pickup_time || "",
     lld_pickup_postal: job?.lld_pickup_postal || "",
@@ -251,7 +265,7 @@ export default function JobForm({ job, onSubmit, onCancel }) {
         </div>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} noValidate className="space-y-5">
 
           {/* Row 1: Job Type + Status + Export toggle */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

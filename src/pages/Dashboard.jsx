@@ -93,11 +93,13 @@ export default function Dashboard() {
   const updateMutation = useMutation({
     mutationFn: ({ id, data }) => entities.JobRecord.update(id, data),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['jobs'] }); setShowForm(false); setEditingJob(null); },
+    onError: (error) => { alert('Failed to update record: ' + (error?.message || 'Unknown error')); },
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id) => entities.JobRecord.delete(id),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['jobs'] }); setDeletingJob(null); },
+    onError: (error) => { alert('Failed to delete record: ' + (error?.message || 'Unknown error')); },
   });
 
   // SW mutations
@@ -117,11 +119,13 @@ export default function Dashboard() {
   const swUpdateMutation = useMutation({
     mutationFn: ({ id, data }) => entities.SWProjectRecord.update(id, data),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['swjobs'] }); setShowSWForm(false); setEditingSWJob(null); },
+    onError: (error) => { alert('Failed to update SW record: ' + (error?.message || 'Unknown error')); },
   });
 
   const swDeleteMutation = useMutation({
     mutationFn: (id) => entities.SWProjectRecord.delete(id),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['swjobs'] }); setDeletingSWJob(null); },
+    onError: (error) => { alert('Failed to delete SW record: ' + (error?.message || 'Unknown error')); },
   });
 
   const swMarkCompletedMutation = useMutation({
