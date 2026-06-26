@@ -1,0 +1,121 @@
+{
+  "name": "SWProjectRecord",
+  "type": "object",
+  "properties": {
+    "job_type": {
+      "type": "string",
+      "enum": [
+        "40FT FCL",
+        "20FT FCL"
+      ],
+      "description": "Type of FCL job"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "Vendor name"
+    },
+    "vessel": {
+      "type": "string",
+      "description": "Vessel name"
+    },
+    "voy": {
+      "type": "string",
+      "description": "Voyage number"
+    },
+    "container_number": {
+      "type": "string",
+      "description": "Container number"
+    },
+    "ccp": {
+      "type": "string",
+      "description": "Cargo Clearance Permit number"
+    },
+    "ccp_valid_date": {
+      "type": "string",
+      "format": "date",
+      "description": "CCP validity date"
+    },
+    "out_gate_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Out gate date"
+    },
+    "trucking_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Truck in date"
+    },
+    "empty_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Empty date"
+    },
+    "truck_out_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Truck out date"
+    },
+    "return_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Return date"
+    },
+    "return_depot": {
+      "type": "string",
+      "description": "Return depot name"
+    },
+    "container_vgm": {
+      "type": "number",
+      "description": "Container VGM weight in KG (required when Heavy Duty Surcharge is selected)"
+    },
+    "delivery_address_name": {
+      "type": "string",
+      "description": "Saved address name reference"
+    },
+    "delivery_address": {
+      "type": "string",
+      "description": "Delivery address"
+    },
+    "delivery_postal_code": {
+      "type": "string",
+      "description": "Delivery postal code"
+    },
+    "pic_name": {
+      "type": "string",
+      "description": "Person in charge name"
+    },
+    "pic_contact": {
+      "type": "string",
+      "description": "Person in charge contact number"
+    },
+    "remarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Remarks / charges"
+    },
+    "remark_prices": {
+      "type": "object",
+      "description": "Prices associated with each remark/charge"
+    },
+    "remarks_text": {
+      "type": "string",
+      "description": "Additional free text remarks"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "In Progress",
+        "Ready to Bill",
+        "Completed"
+      ],
+      "default": "Pending",
+      "description": "Job status"
+    }
+  },
+  "required": [
+    "job_type"
+  ]
+}

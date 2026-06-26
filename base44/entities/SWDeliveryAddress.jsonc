@@ -1,0 +1,29 @@
+{
+  "name": "SWDeliveryAddress",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Friendly name for this address (e.g. 'Jurong Cold Store')"
+    },
+    "address": {
+      "type": "string",
+      "description": "Full delivery address"
+    },
+    "postal_code": {
+      "type": "string",
+      "description": "Postal code"
+    },
+    "pic_name": {
+      "type": "string",
+      "description": "Person in charge name"
+    },
+    "pic_contact": {
+      "type": "string",
+      "description": "Person in charge contact number"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

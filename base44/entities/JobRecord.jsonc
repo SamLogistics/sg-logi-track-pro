@@ -1,0 +1,416 @@
+{
+  "name": "JobRecord",
+  "type": "object",
+  "properties": {
+    "is_export": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is an export job"
+    },
+    "job_type": {
+      "type": "string",
+      "enum": [
+        "40FT FCL",
+        "20FT FCL",
+        "20TK",
+        "40TK",
+        "OOG",
+        "20FT FR",
+        "40FT FR",
+        "40OT",
+        "20OT",
+        "LCL",
+        "Local Delivery",
+        "Local 40ft Trailer",
+        "Local 20ft Trailer",
+        "Cross Border Transport",
+        "Local Lorry Delivery"
+      ],
+      "description": "Type of transportation job"
+    },
+    "customer_name": {
+      "type": "string",
+      "description": "Customer name"
+    },
+    "customer_ref": {
+      "type": "string",
+      "description": "Customer reference number"
+    },
+    "bl_number": {
+      "type": "string",
+      "description": "Booking Number (Export jobs)"
+    },
+    "export_containers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "container_number": {
+            "type": "string"
+          },
+          "vgm": {
+            "type": "number"
+          },
+          "truck_out_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "port_in_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "description": "List of containers under one Booking (Export jobs)"
+    },
+    "ccp": {
+      "type": "string",
+      "description": "Cargo Clearance Permit number"
+    },
+    "ccp_valid_date": {
+      "type": "string",
+      "format": "date",
+      "description": "CCP validity date"
+    },
+    "portnet_released": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether Portnet has been released"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "Vendor name"
+    },
+    "vendor_invoice_number": {
+      "type": "string",
+      "description": "Vendor invoice number"
+    },
+    "vendor_invoice_amount": {
+      "type": "number",
+      "description": "Vendor invoice amount"
+    },
+    "carrier": {
+      "type": "string",
+      "description": "Carrier name"
+    },
+    "vessel": {
+      "type": "string",
+      "description": "Vessel name"
+    },
+    "voy": {
+      "type": "string",
+      "description": "Voyage number"
+    },
+    "berthing_port": {
+      "type": "string",
+      "description": "Vessel berthing port"
+    },
+    "container_number": {
+      "type": "string",
+      "description": "Container number (Import jobs)"
+    },
+    "vessel_eta": {
+      "type": "string",
+      "format": "date",
+      "description": "Vessel estimated time of arrival"
+    },
+    "trucking_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Truck in date"
+    },
+    "delivery_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Delivery date (Import only)"
+    },
+    "truck_out_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Truck out date"
+    },
+    "return_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Container return date (Import jobs)"
+    },
+    "port_in_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Port in date (Export jobs)"
+    },
+    "return_depot": {
+      "type": "string",
+      "description": "Return depot name (Import) / Collection depot (Export)"
+    },
+    "delivery_postal_code": {
+      "type": "string",
+      "description": "Singapore delivery postal code"
+    },
+    "delivery_address": {
+      "type": "string",
+      "description": "Delivery address"
+    },
+    "delivery_unit": {
+      "type": "string",
+      "description": "Delivery unit number"
+    },
+    "pic_name": {
+      "type": "string",
+      "description": "Person in charge name"
+    },
+    "pic_contact": {
+      "type": "string",
+      "description": "Person in charge contact number"
+    },
+    "container_vgm": {
+      "type": "number",
+      "description": "Container VGM weight in KG"
+    },
+    "is_out_of_gauge": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether container is out of gauge"
+    },
+    "escort_required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether police/escort is required for OOG"
+    },
+    "escort_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Escort date"
+    },
+    "escort_time": {
+      "type": "string",
+      "description": "Escort time (HH:MM)"
+    },
+    "remarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Remarks/charges"
+    },
+    "remark_prices": {
+      "type": "object",
+      "description": "Prices associated with each remark/charge"
+    },
+    "remarks_text": {
+      "type": "string",
+      "description": "Additional free text remarks"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "In Progress",
+        "Ready to Bill",
+        "Completed"
+      ],
+      "default": "Pending",
+      "description": "Job status"
+    },
+    "billed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the job has been billed"
+    },
+    "invoice_number": {
+      "type": "string",
+      "description": "Invoice number once billed"
+    },
+    "invoice_amount": {
+      "type": "number",
+      "description": "Invoice amount"
+    },
+    "invoice_to": {
+      "type": "string",
+      "description": "LCL: Bill to company name"
+    },
+    "sysfreight_job_number": {
+      "type": "string",
+      "description": "Sysfreight job number"
+    },
+    "lcl_vehicle_size": {
+      "type": "string",
+      "enum": [
+        "Van",
+        "14ft",
+        "20ft",
+        "24ft"
+      ],
+      "description": "LCL vehicle size"
+    },
+    "lcl_crane": {
+      "type": "boolean",
+      "default": false,
+      "description": "LCL: crane required"
+    },
+    "lcl_tailgate": {
+      "type": "boolean",
+      "default": false,
+      "description": "LCL: tailgate required"
+    },
+    "lcl_box_or_open": {
+      "type": "string",
+      "enum": [
+        "Box",
+        "Open"
+      ],
+      "description": "LCL: box or open truck"
+    },
+    "lcl_attendant": {
+      "type": "boolean",
+      "default": false,
+      "description": "LCL: attendant needed"
+    },
+    "lcl_attendant_count": {
+      "type": "number",
+      "description": "LCL: number of attendants"
+    },
+    "lcl_job_start_time": {
+      "type": "string",
+      "description": "LCL: job start time"
+    },
+    "lcl_job_end_time": {
+      "type": "string",
+      "description": "LCL: job end time"
+    },
+    "lcl_collection_postal": {
+      "type": "string",
+      "description": "LCL: collection postal code"
+    },
+    "lcl_collection_address": {
+      "type": "string",
+      "description": "LCL: collection address"
+    },
+    "lcl_delivery_postal": {
+      "type": "string",
+      "description": "LCL: delivery postal code"
+    },
+    "lcl_delivery_address": {
+      "type": "string",
+      "description": "LCL: delivery address"
+    },
+    "lcl_remarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "LCL: remarks/charges"
+    },
+    "lcl_remark_prices": {
+      "type": "object",
+      "description": "LCL: prices for each remark"
+    },
+    "lcl_invoice_to": {
+      "type": "string",
+      "description": "LCL: invoice to (bill to company)"
+    },
+    "lcl_distance_km": {
+      "type": "string",
+      "description": "LCL: driving distance between collection and delivery"
+    },
+    "lld_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Local Lorry Delivery: job date"
+    },
+    "lld_pickup_point": {
+      "type": "string",
+      "description": "Local Lorry Delivery: pickup point"
+    },
+    "lld_pickup_time": {
+      "type": "string",
+      "description": "Local Lorry Delivery: pickup time or comment"
+    },
+    "lld_pickup_postal": {
+      "type": "string",
+      "description": "Local Lorry Delivery: pickup postal code"
+    },
+    "lld_pickup_address": {
+      "type": "string",
+      "description": "Local Lorry Delivery: pickup full address"
+    },
+    "lld_pickup_pic_name": {
+      "type": "string",
+      "description": "Local Lorry Delivery: pickup PIC name"
+    },
+    "lld_pickup_pic_contact": {
+      "type": "string",
+      "description": "Local Lorry Delivery: pickup PIC contact"
+    },
+    "lld_dropoff_postal": {
+      "type": "string",
+      "description": "Local Lorry Delivery: drop-off postal code"
+    },
+    "lld_dropoff_address": {
+      "type": "string",
+      "description": "Local Lorry Delivery: drop-off full address"
+    },
+    "lld_dropoff_pic_name": {
+      "type": "string",
+      "description": "Local Lorry Delivery: drop-off PIC name"
+    },
+    "lld_dropoff_pic_contact": {
+      "type": "string",
+      "description": "Local Lorry Delivery: drop-off PIC contact"
+    },
+    "lld_lorry_number": {
+      "type": "string",
+      "description": "Local Lorry Delivery: lorry plate number (optional)"
+    },
+    "lld_driver_name": {
+      "type": "string",
+      "description": "Local Lorry Delivery: driver name (optional)"
+    },
+    "lld_driver_contact": {
+      "type": "string",
+      "description": "Local Lorry Delivery: driver contact (optional)"
+    },
+    "lld_assistant_name": {
+      "type": "string",
+      "description": "Local Lorry Delivery: delivery assistant name (optional)"
+    },
+    "lld_assistant_contact": {
+      "type": "string",
+      "description": "Local Lorry Delivery: delivery assistant contact (optional)"
+    },
+    "lld_job_notes": {
+      "type": "string",
+      "description": "Local Lorry Delivery: job notes"
+    },
+    "lld_remarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Local Lorry Delivery: remarks/charges"
+    },
+    "lld_remark_prices": {
+      "type": "object",
+      "description": "Local Lorry Delivery: prices for each remark"
+    },
+    "lld_ot_start_time": {
+      "type": "string",
+      "description": "Local Lorry Delivery: OT start time"
+    },
+    "lld_ot_end_time": {
+      "type": "string",
+      "description": "Local Lorry Delivery: OT end time"
+    },
+    "lld_ot_hours_manual": {
+      "type": "number",
+      "description": "Local Lorry Delivery: manually entered OT hours"
+    },
+    "lld_ot_hourly_rate": {
+      "type": "number",
+      "description": "Local Lorry Delivery: OT hourly rate"
+    }
+  },
+  "required": [
+    "job_type"
+  ]
+}

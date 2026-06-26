@@ -1,0 +1,70 @@
+{
+  "name": "DepotCharge",
+  "type": "object",
+  "properties": {
+    "depot_name": {
+      "type": "string",
+      "description": "Name of the return depot"
+    },
+    "dhc_charge": {
+      "type": "number",
+      "description": "Depot handling charge (DHC) amount"
+    },
+    "admin_charge": {
+      "type": "number",
+      "description": "Admin charge amount"
+    },
+    "additional_charges": {
+      "type": "number",
+      "description": "Additional charges amount"
+    },
+    "currency": {
+      "type": "string",
+      "default": "SGD",
+      "description": "Currency for the charge"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about this depot"
+    },
+    "pending_dhc_charge": {
+      "type": "number",
+      "description": "Upcoming DHC charge (will take effect on effective_date)"
+    },
+    "pending_admin_charge": {
+      "type": "number",
+      "description": "Upcoming admin charge (will take effect on effective_date)"
+    },
+    "pending_additional_charges": {
+      "type": "number",
+      "description": "Upcoming additional charges (will take effect on effective_date)"
+    },
+    "pending_effective_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the pending charges take effect"
+    }
+  },
+  "required": [
+    "depot_name",
+    "dhc_charge"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
